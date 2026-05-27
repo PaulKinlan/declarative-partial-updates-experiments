@@ -19,15 +19,17 @@ export function readSibling(handlerUrl: string, name: string): string {
   return Deno.readTextFileSync(dirFor(handlerUrl) + name);
 }
 
-// Reads a sibling HTML file and substitutes `{{source}}` with the source-viewer block.
-// Optional extra placeholders can be provided via `vars`.
+// Reads a sibling HTML file. The marker `<!-- source-viewer goes here -->` is replaced
+// with the source-viewer block. Extra named placeholders ({{name}}) can be supplied via `vars`.
+const SOURCE_MARKER = "<!-- source-viewer goes here -->";
+
 export function loadShell(
   handlerUrl: string,
   name = "index.html",
   vars: Record<string, string> = {},
 ): string {
   let raw = readSibling(handlerUrl, name);
-  raw = raw.replace("{{source}}", sourceBlock(handlerUrl));
+  raw = raw.replace(SOURCE_MARKER, sourceBlock(handlerUrl));
   for (const [k, v] of Object.entries(vars)) {
     raw = raw.replaceAll(`{{${k}}}`, v);
   }

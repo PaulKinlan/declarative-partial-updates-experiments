@@ -12,10 +12,9 @@ This is a port of
 [patching-clock](https://github.com/PaulKinlan/3d-io-demo-26/tree/main/demos/patching-clock) from
 `3d-io-demo-26`, adapted to the Deno runtime and the shared `streamingResponse` helper.
 
-Inspired by [Phil Hawksworth](https://www.hawksworx.com/)'s legendary Netlify demo where the site
-redeployed every second on stage to prove the build pipeline could keep up — same "look how alive
-this thing is" energy, but here it is the HTTP response itself that stays open, not the build
-pipeline.
+Inspired by [Phil Hawksworth](https://philhawksworth.dev/)'s legendary Netlify demo where the site
+redeployed every second on stage to prove the build pipeline could keep up. Here it is the HTTP
+response itself that stays open, not the build pipeline.
 
 When the user closes the tab, the stream's `cancel()` flips an internal abort flag and `write()`
 throws `StreamAborted`, which the wrapper catches silently. The loop exits, the response is torn

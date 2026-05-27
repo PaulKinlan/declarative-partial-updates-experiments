@@ -42,8 +42,10 @@ declarative-partial-updates-experiments/
   examples/
     NN-name/
       handler.ts       Tiny — just routing and any per-request streaming logic.
-      index.html       The page itself, with markers and a {{source}} placeholder.
-      shell.html       (04 only) HTML template with {{title}}, {{tabs}}, {{body}}, {{source}}.
+      index.html       The page itself. Includes <!-- source-viewer goes here --> where the
+                       source-viewer block should be injected.
+      shell.html       (04 only) HTML template with {{title}}, {{tabs}}, {{body}}, plus the
+                       same <!-- source-viewer goes here --> marker.
       client.js        (02, 03, 04) Vanilla browser JS, served as a sibling file.
       styles.css       (07, 08) Per-example CSS.
       late.html        (01, 08) Late-arriving <template for> fragment.
