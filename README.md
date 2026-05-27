@@ -1,4 +1,4 @@
-# dpu-experiments
+# declarative-partial-updates-experiments
 
 Experiments with Chrome's
 [Declarative Partial Updates API](https://developer.chrome.com/blog/declarative-partial-updates) and
@@ -29,7 +29,7 @@ example degrades to either a normal page or a non-streaming fallback if the API 
 ## Layout
 
 ```
-dpu-experiments/
+declarative-partial-updates-experiments/
   server.ts            single Deno HTTP entry, routes /NN/* to per-example handlers
   deno.json            tasks + fmt
   lib/streaming.ts     ReadableStream helpers

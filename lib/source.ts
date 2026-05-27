@@ -2,14 +2,15 @@
 // Reads files synchronously at module-load time. Restart the server to pick up edits.
 // No client JS — pure <details>/<summary> for collapse behaviour.
 
-const GITHUB_BASE = "https://github.com/PaulKinlan/dpu-experiments/blob/main/";
+const GITHUB_BASE =
+  "https://github.com/PaulKinlan/declarative-partial-updates-experiments/blob/main/";
 
 function escapeHTML(s: string): string {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
 function projectRelative(absPath: string): string {
-  const m = absPath.match(/\/dpu-experiments\/(.+)$/);
+  const m = absPath.match(/\/declarative-partial-updates-experiments\/(.+)$/);
   return m ? m[1] : absPath;
 }
 

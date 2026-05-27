@@ -85,7 +85,7 @@ const ISLANDS: Island[] = [
     body: `<ul style="margin:0;padding-left:1.2rem;font-size:.85rem;">
   <li>aifocus / main &mdash; <span style="color:#1d8b3e;">green</span></li>
   <li>agent-do / main &mdash; <span style="color:#1d8b3e;">green</span></li>
-  <li>dpu-experiments / main &mdash; <span style="color:#b87b00;">running</span></li>
+  <li>declarative-partial-updates-experiments / main &mdash; <span style="color:#b87b00;">running</span></li>
 </ul>`,
   },
 ];
