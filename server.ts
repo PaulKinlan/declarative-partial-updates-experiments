@@ -86,6 +86,23 @@ function indexPage(): Response {
     <h1>declarative partial updates experiments</h1>
     <p class="lede">Experiments with the <a href="https://developer.chrome.com/blog/declarative-partial-updates">Declarative Partial Updates API</a> and the <a href="https://developer.chrome.com/docs/web-platform/navigation-api">Navigation API</a>. As little JS as possible. Chrome 148+ behind <code>chrome://flags/#enable-experimental-web-platform-features</code>.</p>
     <ol class="examples">${items}</ol>
+
+    <section class="refs">
+      <h3>references</h3>
+      <ul>
+        <li><a href="https://developer.chrome.com/blog/declarative-partial-updates?hl=en" target="_blank" rel="noopener">Chrome blog: Declarative Partial Updates</a> <span class="note">— Adam Argyle's introduction to the API.</span></li>
+        <li><a href="https://github.com/WICG/declarative-partial-updates" target="_blank" rel="noopener">WICG/declarative-partial-updates</a> <span class="note">— Specification repo with explainers and issues.</span></li>
+        <li><a href="https://github.com/WICG/declarative-partial-updates/blob/main/patching-explainer.md" target="_blank" rel="noopener">Patching explainer</a> <span class="note">— <code>&lt;?start&gt;/&lt;?end&gt;</code> markers and <code>&lt;template for&gt;</code>.</span></li>
+        <li><a href="https://github.com/WICG/declarative-partial-updates/blob/main/dynamic-markup-revamped-explainer.md" target="_blank" rel="noopener">Dynamic-markup explainer</a> <span class="note">— The new <code>streamHTMLUnsafe()</code> / append / prepend / replace methods.</span></li>
+        <li><a href="https://chromestatus.com/feature/5146752165478400" target="_blank" rel="noopener">Chrome Status entry</a> <span class="note">— Shipping signal.</span></li>
+        <li><a href="https://github.com/whatwg/html/issues/2142" target="_blank" rel="noopener">WHATWG HTML issue #2142</a> <span class="note">— The long-running thread on streaming HTML capabilities.</span></li>
+        <li><a href="https://github.com/GoogleChromeLabs/template-for-polyfill" target="_blank" rel="noopener">template-for polyfill</a></li>
+        <li><a href="https://github.com/GoogleChromeLabs/html-setters-polyfill" target="_blank" rel="noopener">html-setters polyfill</a></li>
+        <li><a href="https://developer.chrome.com/docs/web-platform/navigation-api" target="_blank" rel="noopener">Chrome docs: Navigation API</a></li>
+        <li><a href="https://jasonformat.com/islands-architecture/" target="_blank" rel="noopener">Jason Miller: Islands Architecture</a></li>
+        <li><a href="https://github.com/GoogleChromeLabs/web-perf-demos/blob/main/patching-demos/photo-album-server.js" target="_blank" rel="noopener">photo-album-server.js</a> <span class="note">— A larger out-of-order streaming demo from the same team.</span></li>
+      </ul>
+    </section>
   </main>
 </body>
 </html>`;

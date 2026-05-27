@@ -51,7 +51,10 @@ declarative-partial-updates-experiments/
       README.md        Notes on the example.
 ```
 
-Each example is split by concern: handler.ts is just routing, the HTML lives in `index.html` (or `shell.html`), and any client JS / CSS / data sits in its own sibling file. The source viewer at the bottom of every page automatically lists every file in the example folder so the reader sees the whole picture.
+Each example is split by concern: handler.ts is just routing, the HTML lives in `index.html` (or
+`shell.html`), and any client JS / CSS / data sits in its own sibling file. The source viewer at the
+bottom of every page automatically lists every file in the example folder so the reader sees the
+whole picture.
 
 ## Reference
 
