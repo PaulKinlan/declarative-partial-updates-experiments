@@ -25,6 +25,8 @@ example degrades to either a normal page or a non-streaming fallback if the API 
 | 04 | Navigation API SPA shell, DPU for body content.                                                           | 25 lines  |
 | 05 | Server-orchestrated islands, no client JS. Three async sources race; templates flush in completion order. | none      |
 | 06 | Full streaming SSR. Whole document is one response, sections fill in as their backends resolve.           | none      |
+| 07 | A long-lived response that flushes a fresh `<template for>` every second. Clock updates in place.         | none      |
+| 08 | Placeholder skeleton boxes shaped like the real layout — no layout shift when data lands.                 | none      |
 
 ## Layout
 
@@ -41,6 +43,8 @@ declarative-partial-updates-experiments/
     04-navigation-api/{handler.ts,README.md}
     05-islands/{handler.ts,README.md}
     06-ssr/{handler.ts,README.md}
+    07-streaming-clock/{handler.ts,README.md}
+    08-skeleton-card/{handler.ts,README.md}
 ```
 
 Each example is one file. Open the handler to read the whole thing — there is no framework.

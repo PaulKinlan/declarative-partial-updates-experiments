@@ -4,6 +4,8 @@ import handler03 from "./examples/03-htmx-emulation/handler.ts";
 import handler04 from "./examples/04-navigation-api/handler.ts";
 import handler05 from "./examples/05-islands/handler.ts";
 import handler06 from "./examples/06-ssr/handler.ts";
+import handler07 from "./examples/07-streaming-clock/handler.ts";
+import handler08 from "./examples/08-skeleton-card/handler.ts";
 
 const PORT = Number(Deno.env.get("PORT") ?? 3000);
 
@@ -38,6 +40,16 @@ const EXAMPLES = [
     title: "Server-side rendered",
     blurb: "Server streams the whole document with out-of-order <?marker> fills.",
   },
+  {
+    id: "07",
+    title: "Streaming clock",
+    blurb: "Long-lived response that re-flushes a <template for> every second. Zero JS.",
+  },
+  {
+    id: "08",
+    title: "Skeleton card",
+    blurb: "Placeholder shapes that match the final layout — no layout shift on fill.",
+  },
 ];
 
 const HANDLERS: Record<string, (req: Request, path: string) => Response | Promise<Response>> = {
@@ -47,6 +59,8 @@ const HANDLERS: Record<string, (req: Request, path: string) => Response | Promis
   "04": handler04,
   "05": handler05,
   "06": handler06,
+  "07": handler07,
+  "08": handler08,
 };
 
 function escapeHTML(s: string): string {
