@@ -8,12 +8,36 @@ import handler06 from "./examples/06-ssr/handler.ts";
 const PORT = Number(Deno.env.get("PORT") ?? 3000);
 
 const EXAMPLES = [
-  { id: "01", title: "Basic marker placeholder",   blurb: "<?marker> + <template for> declarative replacement, zero JS." },
-  { id: "02", title: "Streaming fetch into element", blurb: "streamHTML() piping a chunked fetch into the DOM." },
-  { id: "03", title: "HTMX emulation",               blurb: "Tiny JS that turns data-target attributes into streamed partial updates." },
-  { id: "04", title: "Navigation API + DPU",         blurb: "SPA routing via navigation.intercept(), content via streamHTML." },
-  { id: "05", title: "Islands architecture",         blurb: "Independent islands, each fetched in parallel via DPU." },
-  { id: "06", title: "Server-side rendered",         blurb: "Server streams the whole document with out-of-order <?marker> fills." },
+  {
+    id: "01",
+    title: "Basic marker placeholder",
+    blurb: "<?marker> + <template for> declarative replacement, zero JS.",
+  },
+  {
+    id: "02",
+    title: "Streaming fetch into element",
+    blurb: "streamHTML() piping a chunked fetch into the DOM.",
+  },
+  {
+    id: "03",
+    title: "HTMX emulation",
+    blurb: "Tiny JS that turns data-target attributes into streamed partial updates.",
+  },
+  {
+    id: "04",
+    title: "Navigation API + DPU",
+    blurb: "SPA routing via navigation.intercept(), content via streamHTML.",
+  },
+  {
+    id: "05",
+    title: "Islands architecture",
+    blurb: "Independent islands, each fetched in parallel via DPU.",
+  },
+  {
+    id: "06",
+    title: "Server-side rendered",
+    blurb: "Server streams the whole document with out-of-order <?marker> fills.",
+  },
 ];
 
 const HANDLERS: Record<string, (req: Request, path: string) => Response | Promise<Response>> = {
@@ -25,9 +49,15 @@ const HANDLERS: Record<string, (req: Request, path: string) => Response | Promis
   "06": handler06,
 };
 
+function escapeHTML(s: string): string {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
 function indexPage(): Response {
   const items = EXAMPLES.map((e) =>
-    `<li><a href="/${e.id}/"><strong>${e.id}.</strong> ${e.title}</a><p>${e.blurb}</p></li>`
+    `<li><a href="/${e.id}/"><strong>${e.id}.</strong> ${escapeHTML(e.title)}</a><p>${
+      escapeHTML(e.blurb)
+    }</p></li>`
   ).join("");
   const body = `<!doctype html>
 <html lang="en">
@@ -54,11 +84,13 @@ async function staticFile(path: string): Promise<Response> {
     const ext = path.split(".").pop() ?? "";
     const types: Record<string, string> = {
       css: "text/css; charset=utf-8",
-      js:  "application/javascript; charset=utf-8",
+      js: "application/javascript; charset=utf-8",
       html: "text/html; charset=utf-8",
       svg: "image/svg+xml",
     };
-    return new Response(file, { headers: { "content-type": types[ext] ?? "application/octet-stream" } });
+    return new Response(file, {
+      headers: { "content-type": types[ext] ?? "application/octet-stream" },
+    });
   } catch {
     return new Response("Not found", { status: 404 });
   }
