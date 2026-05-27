@@ -1,4 +1,7 @@
 import { fragmentResponse, htmlPage, sleep, streamingResponse } from "../../lib/streaming.ts";
+import { sourceBlock } from "../../lib/source.ts";
+
+const SOURCE = sourceBlock(import.meta.url);
 
 const INDEX = `<main>
   <p class="crumbs"><a href="/">&larr; back to index</a></p>
@@ -36,6 +39,8 @@ res.body
       target.innerHTML = '<p style="color:var(--muted);margin:0;">cleared.</p>';
     });
   </script>
+
+  ${SOURCE}
 </main>`;
 
 const TOKENS = [
@@ -51,7 +56,7 @@ const TOKENS = [
   "<li>second item</li>",
   "<li>third item</li>",
   "</ul>",
-  "<p style=\"color:var(--muted);font-size:.85rem;\">stream ended.</p>",
+  '<p style="color:var(--muted);font-size:.85rem;">stream ended.</p>',
 ];
 
 export default function handle(_req: Request, path: string): Response | Promise<Response> {

@@ -1,4 +1,7 @@
 import { sleep, streamingResponse } from "../../lib/streaming.ts";
+import { sourceBlock } from "../../lib/source.ts";
+
+const SOURCE = sourceBlock(import.meta.url);
 
 const SHELL = `<!doctype html>
 <html lang="en">
@@ -30,6 +33,8 @@ const SHELL = `<!doctype html>
 &lt;/template&gt;</code></pre>
 
   <p style="margin-top:2rem;color:var(--muted);font-size:.85rem;">Hint: the server holds the connection open for ~1.8s then flushes the template. The shell renders immediately.</p>
+
+  ${SOURCE}
 </main>
 `;
 

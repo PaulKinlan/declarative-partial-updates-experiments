@@ -1,6 +1,8 @@
 # 01. Basic marker placeholder
 
-Single declarative `<?start name="X">...<?end>` block holds a skeleton in place. Later in the same response stream, a `<template for="X">` arrives and the browser replaces the placeholder. No client JS.
+Single declarative `<?start name="X">...<?end>` block holds a skeleton in place. Later in the same
+response stream, a `<template for="X">` arrives and the browser replaces the placeholder. No client
+JS.
 
 Run:
 

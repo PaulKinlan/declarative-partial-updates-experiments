@@ -1,10 +1,13 @@
 import { fragmentResponse, htmlPage, sleep, streamingResponse } from "../../lib/streaming.ts";
+import { sourceBlock } from "../../lib/source.ts";
+
+const SOURCE = sourceBlock(import.meta.url);
 
 const PAGES = {
   home: {
     title: "home",
     body: [
-      "<h2 style=\"margin:0 0 .5rem;\">home</h2>",
+      '<h2 style="margin:0 0 .5rem;">home</h2>',
       "<p>this content is streamed from <code>/04/page/home</code>. The URL in your address bar updated via <code>navigation.intercept()</code>, no full reload happened.</p>",
       "<p>Try the back button. It also goes through the navigate event.</p>",
     ],
@@ -12,7 +15,7 @@ const PAGES = {
   about: {
     title: "about",
     body: [
-      "<h2 style=\"margin:0 0 .5rem;\">about</h2>",
+      '<h2 style="margin:0 0 .5rem;">about</h2>',
       "<p>a tiny SPA built on the Navigation API + Declarative Partial Updates. The whole client is ~25 lines.</p>",
       "<p>If the API is unavailable, links fall back to normal full-page navigations and everything still works because the server can render every page standalone.</p>",
     ],
@@ -20,11 +23,11 @@ const PAGES = {
   posts: {
     title: "posts",
     body: [
-      "<h2 style=\"margin:0 0 .5rem;\">posts</h2>",
-      "<ul style=\"margin:0;padding-left:1.2rem;\">",
-      "<li><a href=\"/04/post/declarative-partial-updates\">declarative partial updates</a></li>",
-      "<li><a href=\"/04/post/navigation-api\">the navigation api</a></li>",
-      "<li><a href=\"/04/post/streaming-html\">streaming html</a></li>",
+      '<h2 style="margin:0 0 .5rem;">posts</h2>',
+      '<ul style="margin:0;padding-left:1.2rem;">',
+      '<li><a href="/04/post/declarative-partial-updates">declarative partial updates</a></li>',
+      '<li><a href="/04/post/navigation-api">the navigation api</a></li>',
+      '<li><a href="/04/post/streaming-html">streaming html</a></li>',
       "</ul>",
     ],
   },
@@ -34,25 +37,25 @@ const POSTS: Record<string, { title: string; body: string[] }> = {
   "declarative-partial-updates": {
     title: "declarative partial updates",
     body: [
-      "<h2 style=\"margin:0 0 .5rem;\">declarative partial updates</h2>",
+      '<h2 style="margin:0 0 .5rem;">declarative partial updates</h2>',
       "<p>processing instructions plus <code>&lt;template for&gt;</code> let the server stream patches into a long-lived response.</p>",
-      "<p><a href=\"/04/posts\">&larr; back to posts</a></p>",
+      '<p><a href="/04/posts">&larr; back to posts</a></p>',
     ],
   },
   "navigation-api": {
     title: "navigation api",
     body: [
-      "<h2 style=\"margin:0 0 .5rem;\">the navigation api</h2>",
+      '<h2 style="margin:0 0 .5rem;">the navigation api</h2>',
       "<p>one event (<code>navigate</code>) covers link clicks, form posts, back/forward, programmatic navigation. <code>event.intercept({ handler })</code> takes over.</p>",
-      "<p><a href=\"/04/posts\">&larr; back to posts</a></p>",
+      '<p><a href="/04/posts">&larr; back to posts</a></p>',
     ],
   },
   "streaming-html": {
     title: "streaming html",
     body: [
-      "<h2 style=\"margin:0 0 .5rem;\">streaming html</h2>",
+      '<h2 style="margin:0 0 .5rem;">streaming html</h2>',
       "<p>HTML has always streamed. DPU just gives us declarative tools so the late parts can flow into specific holes punched into the early parts.</p>",
-      "<p><a href=\"/04/posts\">&larr; back to posts</a></p>",
+      '<p><a href="/04/posts">&larr; back to posts</a></p>',
     ],
   },
 };
@@ -100,7 +103,7 @@ if ('navigation' in window) {
 
 function shell(currentPath: string, initialBody: string): string {
   const tabs = [
-    ["home",  "/04/home"],
+    ["home", "/04/home"],
     ["posts", "/04/posts"],
     ["about", "/04/about"],
   ].map(([label, href]) => {
@@ -114,6 +117,8 @@ function shell(currentPath: string, initialBody: string): string {
   <nav class="tabs">${tabs}</nav>
   <section class="demo-area" id="content">${initialBody}</section>
   <script src="/04/client.js"></script>
+
+  ${SOURCE}
 </main>`;
 }
 
@@ -155,7 +160,10 @@ export default function handle(_req: Request, path: string): Response | Promise<
   }
   if (path === "/client.js") {
     return new Response(CLIENT_JS, {
-      headers: { "content-type": "application/javascript; charset=utf-8", "cache-control": "no-store" },
+      headers: {
+        "content-type": "application/javascript; charset=utf-8",
+        "cache-control": "no-store",
+      },
     });
   }
   return fragmentResponse("Not found");

@@ -1,4 +1,7 @@
 import { fragmentResponse, htmlPage, sleep, streamingResponse } from "../../lib/streaming.ts";
+import { sourceBlock } from "../../lib/source.ts";
+
+const SOURCE = sourceBlock(import.meta.url);
 
 const INDEX = `<main>
   <p class="crumbs"><a href="/">&larr; back to index</a></p>
@@ -37,6 +40,8 @@ const INDEX = `<main>
 });</code></pre>
 
   <script src="/03/client.js"></script>
+
+  ${SOURCE}
 </main>`;
 
 const CLIENT_JS = `// pure-DOM htmx-lite, ~40 lines
@@ -71,32 +76,41 @@ document.addEventListener('click', async (e) => {
 
 const FRAGMENTS: Record<string, string[]> = {
   news: [
-    "<h2 style=\"margin:0 0 .4rem;\">latest news</h2>",
-    "<ul style=\"margin:0;padding-left:1.2rem;\">",
+    '<h2 style="margin:0 0 .4rem;">latest news</h2>',
+    '<ul style="margin:0;padding-left:1.2rem;">',
     "<li>chrome 148 ships declarative partial updates</li>",
     "<li>navigation api ships in safari 26.2</li>",
     "<li>web push reaches 10 years from spec to ios</li>",
     "</ul>",
   ],
   weather: [
-    "<h2 style=\"margin:0 0 .4rem;\">weather</h2>",
-    "<p style=\"margin:0;\">liverpool, 12°c, cloudy with hopeful sun.</p>",
+    '<h2 style="margin:0 0 .4rem;">weather</h2>',
+    '<p style="margin:0;">liverpool, 12°c, cloudy with hopeful sun.</p>',
   ],
   quote: [
-    "<h2 style=\"margin:0 0 .4rem;\">quote</h2>",
-    "<blockquote style=\"margin:0;border-left:3px solid var(--accent);padding-left:.8rem;color:var(--muted);\">",
+    '<h2 style="margin:0 0 .4rem;">quote</h2>',
+    '<blockquote style="margin:0;border-left:3px solid var(--accent);padding-left:.8rem;color:var(--muted);">',
     "&quot;the web is being cooked, and it smells fantastic.&quot;",
     "</blockquote>",
   ],
-  append: ["<p style=\"margin:0.5rem 0 0;color:var(--muted);font-size:.9rem;\">appended at " + Date.now() + "</p>"],
-  prepend: ["<p style=\"margin:0 0 0.5rem;color:var(--muted);font-size:.9rem;\">prepended at " + Date.now() + "</p>"],
+  append: [
+    '<p style="margin:0.5rem 0 0;color:var(--muted);font-size:.9rem;">appended at ' + Date.now() +
+    "</p>",
+  ],
+  prepend: [
+    '<p style="margin:0 0 0.5rem;color:var(--muted);font-size:.9rem;">prepended at ' + Date.now() +
+    "</p>",
+  ],
 };
 
 export default function handle(_req: Request, path: string): Response | Promise<Response> {
   if (path === "/" || path === "/index.html") return htmlPage(INDEX, "03 · HTMX emulation");
   if (path === "/client.js") {
     return new Response(CLIENT_JS, {
-      headers: { "content-type": "application/javascript; charset=utf-8", "cache-control": "no-store" },
+      headers: {
+        "content-type": "application/javascript; charset=utf-8",
+        "cache-control": "no-store",
+      },
     });
   }
   const fragMatch = path.match(/^\/fragment\/(\w+)$/);
@@ -104,9 +118,17 @@ export default function handle(_req: Request, path: string): Response | Promise<
     const key = fragMatch[1];
     // regenerate timestamped fragments per request
     const tokens = key === "append"
-      ? [`<p style="margin:0.5rem 0 0;color:var(--muted);font-size:.9rem;">appended at ${new Date().toLocaleTimeString()}</p>`]
+      ? [
+        `<p style="margin:0.5rem 0 0;color:var(--muted);font-size:.9rem;">appended at ${
+          new Date().toLocaleTimeString()
+        }</p>`,
+      ]
       : key === "prepend"
-      ? [`<p style="margin:0 0 0.5rem;color:var(--muted);font-size:.9rem;">prepended at ${new Date().toLocaleTimeString()}</p>`]
+      ? [
+        `<p style="margin:0 0 0.5rem;color:var(--muted);font-size:.9rem;">prepended at ${
+          new Date().toLocaleTimeString()
+        }</p>`,
+      ]
       : FRAGMENTS[key];
     if (!tokens) return fragmentResponse("<p>fragment not found</p>");
     return streamingResponse(async (write) => {

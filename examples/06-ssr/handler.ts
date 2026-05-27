@@ -1,4 +1,7 @@
 import { sleep, streamingResponse } from "../../lib/streaming.ts";
+import { sourceBlock } from "../../lib/source.ts";
+
+const SOURCE = sourceBlock(import.meta.url);
 
 interface Section {
   name: string;
@@ -11,13 +14,15 @@ const SECTIONS: Section[] = [
   {
     name: "user",
     delayMs: 200,
-    render: () => `<h2 style="margin:0 0 .25rem;">Hello, Paul</h2>
+    render: () =>
+      `<h2 style="margin:0 0 .25rem;">Hello, Paul</h2>
 <p style="margin:0;color:var(--muted);font-size:.9rem;">last seen 2 minutes ago</p>`,
   },
   {
     name: "feed",
     delayMs: 900,
-    render: () => `<ul style="margin:0;padding-left:1.2rem;">
+    render: () =>
+      `<ul style="margin:0;padding-left:1.2rem;">
   <li>declarative partial updates landed in chrome 148</li>
   <li>navigation api shipped in safari 26.2</li>
   <li>llms can now write whole browsers, apparently</li>
@@ -26,7 +31,8 @@ const SECTIONS: Section[] = [
   {
     name: "shop",
     delayMs: 1600,
-    render: () => `<div style="display:flex;gap:1rem;align-items:center;">
+    render: () =>
+      `<div style="display:flex;gap:1rem;align-items:center;">
   <div style="width:48px;height:48px;border-radius:8px;background:var(--code-bg);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--muted);">PK</div>
   <div>
     <strong>kit · hire me</strong><br>
@@ -37,7 +43,8 @@ const SECTIONS: Section[] = [
   {
     name: "footer",
     delayMs: 2200,
-    render: () => `<p style="margin:0;color:var(--muted);font-size:.8rem;">all sections rendered server-side, streamed as each backend completed. zero client JS.</p>`,
+    render: () =>
+      `<p style="margin:0;color:var(--muted);font-size:.8rem;">all sections rendered server-side, streamed as each backend completed. zero client JS.</p>`,
   },
 ];
 
@@ -82,6 +89,8 @@ const SHELL = `<!doctype html>
   <section style="margin-top:2rem;">
     <?start name="footer"><span style="color:var(--muted);font-size:.75rem;">waiting for footer...</span><?end>
   </section>
+
+  ${SOURCE}
 </main>
 `;
 

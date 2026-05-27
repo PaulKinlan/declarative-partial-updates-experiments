@@ -1,4 +1,7 @@
 import { sleep, streamingResponse } from "../../lib/streaming.ts";
+import { sourceBlock } from "../../lib/source.ts";
+
+const SOURCE = sourceBlock(import.meta.url);
 
 const SHELL = `<!doctype html>
 <html lang="en">
@@ -49,6 +52,8 @@ const SHELL = `<!doctype html>
   </section>
 
   <p style="margin-top:1.5rem;color:var(--muted);font-size:.85rem;">island timings: weather ~600ms, news ~1.4s, builds ~2.4s. Watch them fill in order of completion.</p>
+
+  ${SOURCE}
 </main>
 `;
 
