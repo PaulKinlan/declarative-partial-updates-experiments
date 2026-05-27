@@ -9,7 +9,8 @@
     "lineWidth": 100,
     "indentWidth": 2,
     "singleQuote": false,
-    "semiColons": true
+    "semiColons": true,
+    "exclude": ["**/*.html", "**/*.css"]
   },
   "compilerOptions": {
     "lib": ["deno.window", "dom"],

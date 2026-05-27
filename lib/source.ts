@@ -19,18 +19,26 @@ interface Entry {
   absPath: string;
 }
 
-export function sourceBlock(handlerUrl: string, extras: string[] = []): string {
+export function sourceBlock(handlerUrl: string): string {
   const handlerAbs = new URL(handlerUrl).pathname;
   const dir = handlerAbs.substring(0, handlerAbs.lastIndexOf("/"));
   const projectRoot = dir.replace(/\/examples\/[^/]+$/, "");
 
+  // Auto-discover every file in the example folder (except handler.ts and README.md,
+  // which we add explicitly and skip respectively).
+  const siblings: string[] = [];
+  for (const entry of Deno.readDirSync(dir)) {
+    if (!entry.isFile) continue;
+    if (entry.name === "handler.ts" || entry.name === "README.md") continue;
+    siblings.push(entry.name);
+  }
+  siblings.sort();
+
   const entries: Entry[] = [
-    { name: "handler.ts", absPath: handlerAbs },
-    ...extras.map((rel) => ({
-      name: rel.split("/").pop() || rel,
-      absPath: rel.startsWith("/") ? rel : `${projectRoot}/${rel}`,
-    })),
+    { name: "handler.ts", absPath: `${dir}/handler.ts` },
+    ...siblings.map((name) => ({ name, absPath: `${dir}/${name}` })),
     { name: "lib/streaming.ts", absPath: `${projectRoot}/lib/streaming.ts` },
+    { name: "lib/files.ts", absPath: `${projectRoot}/lib/files.ts` },
   ];
 
   const blocks = entries.map((entry, i) => {

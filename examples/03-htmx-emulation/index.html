@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>03 · HTMX emulation</title>
+  <link rel="stylesheet" href="/public/styles.css">
+</head>
+<body>
+<main>
+  <p class="crumbs"><a href="/">&larr; back to index</a></p>
+  <h1>03. htmx-style attributes, in 40 lines</h1>
+  <p class="lede">A tiny client (~40 lines) wires <code>data-get</code>, <code>data-target</code> and <code>data-swap</code> to streamed partial updates. No library. Add <code>data-get="/path"</code> to any element and it works.</p>
+
+  <section style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin-bottom:1rem;">
+    <button data-get="/03/fragment/news"    data-target="#out" data-swap="inner">load news</button>
+    <button data-get="/03/fragment/weather" data-target="#out" data-swap="inner">load weather</button>
+    <button data-get="/03/fragment/quote"   data-target="#out" data-swap="inner">load quote</button>
+    <button data-get="/03/fragment/append"  data-target="#out" data-swap="append">append paragraph</button>
+    <button data-get="/03/fragment/prepend" data-target="#out" data-swap="prepend">prepend paragraph</button>
+    <button data-get="/03/fragment/news"    data-target="#out" data-swap="replace">replace whole &lt;section&gt;</button>
+  </section>
+
+  <h3>Target #out</h3>
+  <section class="demo-area" id="out">
+    <p style="color:var(--muted);margin:0;">target. swap modes: inner / append / prepend / replace.</p>
+  </section>
+
+  <script src="/03/client.js"></script>
+
+  {{source}}
+</main>
+</body>
+</html>

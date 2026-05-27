@@ -1,0 +1,17 @@
+.clock-face {
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 2.5rem 1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin: 1.5rem 0;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+/* The connection stays open. Every tick appends a fresh <span>.
+   We hide all spans and only show the most recent one. */
+.clock-face section span { display: none; }
+.clock-face section span:last-of-type { display: inline; color: var(--accent); }

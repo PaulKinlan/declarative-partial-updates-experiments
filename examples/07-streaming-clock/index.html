@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>07 · streaming clock</title>
+  <link rel="stylesheet" href="/public/styles.css">
+  <link rel="stylesheet" href="/07/styles.css">
+</head>
+<body>
+<main>
+  <p class="crumbs"><a href="/">&larr; back to index</a></p>
+  <h1>07. streaming clock (never-ending response)</h1>
+  <p class="lede">A single HTTP response that stays open forever. Every second the server flushes a fresh <code>&lt;template for=&quot;clock&quot;&gt;</code>. The marker is re-emitted inside each template so the next tick has somewhere to land. A CSS rule hides every <code>&lt;span&gt;</code> except the last, so the clock updates in place. Zero client JS.</p>
+
+  <div class="clock-face">
+    <section>
+      <?start name="clock"><span>loading...</span><?end>
+    </section>
+  </div>
+
+  <p style="color:var(--muted);font-size:.85rem;">Open DevTools' Network panel and look at this response. The status will stay "pending" forever (or until you close the tab); each tick is a chunk on the wire.</p>
+
+  <p style="color:var(--muted);font-size:.85rem;">Inspired by <a href="https://www.hawksworx.com/" target="_blank" rel="noopener">Phil Hawksworth</a>'s legendary Netlify demo that deployed the site once a second to prove the build pipeline could keep up. Same vibe: a single, long-lived stream showing something changing in place.</p>
+
+  {{source}}
+</main>

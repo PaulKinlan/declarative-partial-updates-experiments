@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>06 · Streaming SSR</title>
+  <link rel="stylesheet" href="/public/styles.css">
+</head>
+<body>
+<main>
+  <p class="crumbs"><a href="/">&larr; back to index</a></p>
+  <h1>06. streaming SSR with DPU</h1>
+  <p class="lede">The entire page is server-rendered in one HTTP response. The shell flushes immediately, then each section streams in as its backend resolves. Out-of-order. Zero client JS. Refresh as many times as you want.</p>
+
+  <section class="demo-area">
+    <?start name="user">
+      <div class="skeleton lg"></div>
+      <div class="skeleton sm"></div>
+    <?end>
+  </section>
+
+  <h3>feed</h3>
+  <section class="demo-area">
+    <?start name="feed">
+      <div class="skeleton"></div>
+      <div class="skeleton"></div>
+      <div class="skeleton sm"></div>
+    <?end>
+  </section>
+
+  <h3>shop</h3>
+  <section class="demo-area">
+    <?start name="shop">
+      <div class="skeleton lg"></div>
+      <div class="skeleton sm"></div>
+    <?end>
+  </section>
+
+  <section style="margin-top:2rem;">
+    <?start name="footer"><span style="color:var(--muted);font-size:.75rem;">waiting for footer...</span><?end>
+  </section>
+
+  {{source}}
+</main>

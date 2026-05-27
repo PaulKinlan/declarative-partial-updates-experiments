@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>02 · Streaming fetch</title>
+  <link rel="stylesheet" href="/public/styles.css">
+</head>
+<body>
+<main>
+  <p class="crumbs"><a href="/">&larr; back to index</a></p>
+  <h1>02. streamHTML into an element</h1>
+  <p class="lede">A static page loads first. A button kicks off a <code>fetch()</code> whose body is piped into a target element via <code>streamHTMLUnsafe()</code>. Tokens appear as they arrive on the wire.</p>
+
+  <button id="go">stream into target</button>
+  <button id="clear">clear</button>
+
+  <h3>Target</h3>
+  <section class="demo-area" id="target">
+    <p style="color:var(--muted);margin:0;">click the button to stream content here.</p>
+  </section>
+
+  <h3>The minimal JS</h3>
+  <pre><code>const res = await fetch('/02/stream');
+res.body
+  .pipeThrough(new TextDecoderStream())
+  .pipeTo(document.getElementById('target').streamHTMLUnsafe());</code></pre>
+
+  <script src="/02/client.js"></script>
+
+  {{source}}
+</main>
+</body>
+</html>

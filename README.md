@@ -32,22 +32,26 @@ example degrades to either a normal page or a non-streaming fallback if the API 
 
 ```
 declarative-partial-updates-experiments/
-  server.ts            single Deno HTTP entry, routes /NN/* to per-example handlers
-  deno.json            tasks + fmt
-  lib/streaming.ts     ReadableStream helpers
-  public/styles.css    shared CSS
+  server.ts            Single Deno HTTP entry. Routes /NN/* to per-example handlers.
+  deno.json            Tasks + fmt config (HTML/CSS are excluded from formatting).
+  lib/
+    streaming.ts       streamingResponse() helper — ReadableStream<Uint8Array> with client-abort handling.
+    files.ts           readSibling, loadShell (templates {{source}}), tryStatic (asset fallback).
+    source.ts          sourceBlock() — renders the in-page "view source" disclosure.
+  public/styles.css    Shared CSS for the framework chrome (cards, skeletons, tabs, source viewer).
   examples/
-    01-basic-marker/{handler.ts,README.md}
-    02-streaming-fetch/{handler.ts,README.md}
-    03-htmx-emulation/{handler.ts,README.md}
-    04-navigation-api/{handler.ts,README.md}
-    05-islands/{handler.ts,README.md}
-    06-ssr/{handler.ts,README.md}
-    07-streaming-clock/{handler.ts,README.md}
-    08-skeleton-card/{handler.ts,README.md}
+    NN-name/
+      handler.ts       Tiny — just routing and any per-request streaming logic.
+      index.html       The page itself, with markers and a {{source}} placeholder.
+      shell.html       (04 only) HTML template with {{title}}, {{tabs}}, {{body}}, {{source}}.
+      client.js        (02, 03, 04) Vanilla browser JS, served as a sibling file.
+      styles.css       (07, 08) Per-example CSS.
+      late.html        (01, 08) Late-arriving <template for> fragment.
+      content.json     (04) Page bodies as data.
+      README.md        Notes on the example.
 ```
 
-Each example is one file. Open the handler to read the whole thing — there is no framework.
+Each example is split by concern: handler.ts is just routing, the HTML lives in `index.html` (or `shell.html`), and any client JS / CSS / data sits in its own sibling file. The source viewer at the bottom of every page automatically lists every file in the example folder so the reader sees the whole picture.
 
 ## Reference
 

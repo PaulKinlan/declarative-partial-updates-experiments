@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>08 · skeleton card</title>
+  <link rel="stylesheet" href="/public/styles.css">
+  <link rel="stylesheet" href="/08/styles.css">
+</head>
+<body>
+<main>
+  <p class="crumbs"><a href="/">&larr; back to index</a></p>
+  <h1>08. skeleton card (placeholder shapes match the real layout)</h1>
+  <p class="lede">A product card whose <code>&lt;?start&gt;/&lt;?end&gt;</code> placeholder uses skeleton boxes shaped like the final content — image area, title, price, two text lines, button — so there's no layout shift when the data arrives. Zero client JS.</p>
+
+  <section class="store-shell">
+    <div class="product-card">
+      <?start name="user-data">
+        <div class="skeleton sk-image"></div>
+        <div class="skeleton sk-title"></div>
+        <div class="skeleton sk-price"></div>
+        <div class="skeleton sk-line"></div>
+        <div class="skeleton sk-line short"></div>
+        <div class="skeleton sk-button"></div>
+      <?end>
+    </div>
+  </section>
+
+  <p style="color:var(--muted);font-size:.85rem;">Hint: server holds the response open for 2.5s, then flushes the late template. Refresh to see the skeleton again.</p>
+
+  {{source}}
+</main>
