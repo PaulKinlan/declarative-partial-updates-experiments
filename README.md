@@ -68,3 +68,9 @@ whole picture.
   - [patching-clock](https://github.com/PaulKinlan/3d-io-demo-26/tree/main/demos/patching-clock)
   - [patching-user-data](https://github.com/PaulKinlan/3d-io-demo-26/tree/main/demos/patching-user-data)
   - [islands-html](https://github.com/PaulKinlan/3d-io-demo-26/tree/main/demos/islands-html)
+
+## License
+
+Apache License 2.0 — see [LICENSE](./LICENSE).
+
+Copyright 2026 Paul Kinlan.
