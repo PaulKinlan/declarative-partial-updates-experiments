@@ -43,6 +43,8 @@ const SHELL = `<!doctype html>
 
   <p style="color:var(--muted);font-size:.85rem;">Open DevTools' Network panel and look at this response. The status will stay "pending" forever (or until you close the tab); each tick is a chunk on the wire.</p>
 
+  <p style="color:var(--muted);font-size:.85rem;">Inspired by <a href="https://www.hawksworx.com/" target="_blank" rel="noopener">Phil Hawksworth</a>'s legendary Netlify demo that deployed the site once a second to prove the build pipeline could keep up. Same vibe: a single, long-lived stream showing something changing in place.</p>
+
   ${SOURCE}
 </main>
 `;
