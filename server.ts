@@ -103,6 +103,8 @@ function indexPage(): Response {
         <li><a href="https://github.com/GoogleChromeLabs/web-perf-demos/blob/main/patching-demos/photo-album-server.js" target="_blank" rel="noopener">photo-album-server.js</a> <span class="note">— A larger out-of-order streaming demo from the same team.</span></li>
       </ul>
     </section>
+
+    <footer class="byline">made by <a href="https://paul.kinlan.me/" target="_blank" rel="noopener">Paul Kinlan</a></footer>
   </main>
 </body>
 </html>`;
