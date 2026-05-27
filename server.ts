@@ -90,7 +90,7 @@ function indexPage(): Response {
     <section class="refs">
       <h3>references</h3>
       <ul>
-        <li><a href="https://developer.chrome.com/blog/declarative-partial-updates?hl=en" target="_blank" rel="noopener">Chrome blog: Declarative Partial Updates</a> <span class="note">— Adam Argyle's introduction to the API.</span></li>
+        <li><a href="https://developer.chrome.com/blog/declarative-partial-updates?hl=en" target="_blank" rel="noopener">Chrome blog: Declarative Partial Updates</a> <span class="note">— Barry Pollard's introduction to the API.</span></li>
         <li><a href="https://github.com/WICG/declarative-partial-updates" target="_blank" rel="noopener">WICG/declarative-partial-updates</a> <span class="note">— Specification repo with explainers and issues.</span></li>
         <li><a href="https://github.com/WICG/declarative-partial-updates/blob/main/patching-explainer.md" target="_blank" rel="noopener">Patching explainer</a> <span class="note">— <code>&lt;?start&gt;/&lt;?end&gt;</code> markers and <code>&lt;template for&gt;</code>.</span></li>
         <li><a href="https://github.com/WICG/declarative-partial-updates/blob/main/dynamic-markup-revamped-explainer.md" target="_blank" rel="noopener">Dynamic-markup explainer</a> <span class="note">— The new <code>streamHTMLUnsafe()</code> / append / prepend / replace methods.</span></li>
