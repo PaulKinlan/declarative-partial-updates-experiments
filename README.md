@@ -74,3 +74,14 @@ whole picture.
 Apache License 2.0 — see [LICENSE](./LICENSE).
 
 Copyright 2026 Paul Kinlan.
+
+## Capturing the demos
+
+The streaming demos hold their response open, so a normal screenshot hangs. Record any demo as an animated GIF with:
+
+```
+deno task dev            # in one terminal (serves :3000)
+deno run -A capture.mjs http://localhost:3000/07/ clock.gif 5
+```
+
+It drives Chrome (148+, experimental flag) over CDP `Page.startScreencast` and assembles the frames with `ffmpeg`. Frames are only emitted when the page changes, so a clock yields ~1 frame/second.
