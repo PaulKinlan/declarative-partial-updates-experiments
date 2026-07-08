@@ -5,7 +5,7 @@ Experiments with Chrome's
 the [Navigation API](https://developer.chrome.com/docs/web-platform/navigation-api). As little
 JavaScript as possible.
 
-**Live:** <https://dpu-experiments.paulkinlan-ea.deno.net> (each example at `/01` .. `/08`).
+**Live:** <https://declarative-partial-updates.paulkinlan-ea.deno.net> (each example at `/01` .. `/08`).
 Best viewed in Chrome 148+ with `chrome://flags/#enable-experimental-web-platform-features`.
 
 ## Run it
