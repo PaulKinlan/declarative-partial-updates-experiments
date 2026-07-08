@@ -16,5 +16,10 @@
   "compilerOptions": {
     "lib": ["deno.window", "dom"],
     "strict": true
+  },
+  "deploy": {
+    "org": "paulkinlan-ea",
+    "app": "dpu-experiments"
   }
 }
+

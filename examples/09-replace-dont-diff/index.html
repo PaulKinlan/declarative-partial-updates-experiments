@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>09 · replace, don't diff</title>
+  <link rel="stylesheet" href="/public/styles.css">
+  <link rel="stylesheet" href="/09/styles.css">
+</head>
+<body>
+<main>
+  <p class="crumbs"><a href="/">&larr; back to index</a></p>
+  <h1>09. replace, don't diff (do we still need the virtual DOM?)</h1>
+  <p class="lede">A live leaderboard that reshuffles every second. The server re-renders the <em>whole</em> sorted list and streams it as a <code>&lt;template for=&quot;board&quot;&gt;</code> that replaces the region in place. No virtual DOM, no diffing, no reconciliation, no framework, and no client JS. Each row carries a stable <code>view-transition-name</code>, so a browser that opts into view transitions animates the reshuffle for free.</p>
+
+  <div class="board">
+    <?start name="board"><ol class="frame">
+    <li style="view-transition-name:row-astro-foxes">
+      <span class="rank">1</span>
+      <span class="name">Astro Foxes</span>
+      <span class="bar"><span class="fill" style="width:100%"></span></span>
+      <span class="score">42</span>
+    </li>
+    <li style="view-transition-name:row-quantum-owls">
+      <span class="rank">2</span>
+      <span class="name">Quantum Owls</span>
+      <span class="bar"><span class="fill" style="width:93%"></span></span>
+      <span class="score">39</span>
+    </li>
+    <li style="view-transition-name:row-neon-yaks">
+      <span class="rank">3</span>
+      <span class="name">Neon Yaks</span>
+      <span class="bar"><span class="fill" style="width:88%"></span></span>
+      <span class="score">37</span>
+    </li>
+    <li style="view-transition-name:row-pixel-pandas">
+      <span class="rank">4</span>
+      <span class="name">Pixel Pandas</span>
+      <span class="bar"><span class="fill" style="width:83%"></span></span>
+      <span class="score">35</span>
+    </li>
+    <li style="view-transition-name:row-turbo-newts">
+      <span class="rank">5</span>
+      <span class="name">Turbo Newts</span>
+      <span class="bar"><span class="fill" style="width:74%"></span></span>
+      <span class="score">31</span>
+    </li>
+    <li style="view-transition-name:row-velvet-crabs">
+      <span class="rank">6</span>
+      <span class="name">Velvet Crabs</span>
+      <span class="bar"><span class="fill" style="width:67%"></span></span>
+      <span class="score">28</span>
+    </li>
+    </ol><?end>
+  </div>
+
+  <p style="color:var(--muted);font-size:.85rem;">Open DevTools' Network panel: it's one response that never finishes, flushing a fresh <code>&lt;template for=&quot;board&quot;&gt;</code> each tick. Without the API you'll see this first board as a static snapshot instead of a live one.</p>
+
+  <p style="color:var(--muted);font-size:.85rem;">The virtual DOM exists to avoid re-rendering everything: diff the new render against the old tree, then patch only what changed. When the platform can replace a whole named region from streamed HTML, a large class of &quot;you need a framework for this&quot; UIs become a server that prints HTML.</p>
+
+  <section class="refs">
+    <h3>learn more</h3>
+    <ul>
+      <li><a href="https://developer.chrome.com/blog/declarative-partial-updates?hl=en" target="_blank" rel="noopener">Chrome blog: Declarative Partial Updates</a></li>
+      <li><a href="https://github.com/WICG/declarative-partial-updates/blob/main/patching-explainer.md" target="_blank" rel="noopener">WICG explainer: patching</a> <span class="note">— The same marker is re-emitted each tick so the region stays addressable.</span></li>
+      <li><a href="https://developer.chrome.com/docs/web-platform/view-transitions/" target="_blank" rel="noopener">View Transitions</a> <span class="note">— The stable per-row <code>view-transition-name</code> is what animates the reshuffle.</span></li>
+      <li><a href="https://github.com/GoogleChromeLabs/template-for-polyfill" target="_blank" rel="noopener">template-for polyfill</a></li>
+    </ul>
+  </section>
+
+  <!-- source-viewer goes here -->
+
+  <footer class="byline">made by <a href="https://paul.kinlan.me/" target="_blank" rel="noopener">Paul Kinlan</a></footer>
+</main>
+</body>
+</html>

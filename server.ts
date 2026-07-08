@@ -6,6 +6,7 @@ import handler05 from "./examples/05-islands/handler.ts";
 import handler06 from "./examples/06-ssr/handler.ts";
 import handler07 from "./examples/07-streaming-clock/handler.ts";
 import handler08 from "./examples/08-skeleton-card/handler.ts";
+import handler09 from "./examples/09-replace-dont-diff/handler.ts";
 
 const PORT = Number(Deno.env.get("PORT") ?? 3000);
 
@@ -50,6 +51,12 @@ const EXAMPLES = [
     title: "Skeleton card",
     blurb: "Placeholder shapes that match the final layout — no layout shift on fill.",
   },
+  {
+    id: "09",
+    title: "Replace, don't diff",
+    blurb:
+      "A live leaderboard re-rendered and replaced whole each tick. No virtual DOM, no diff, no client JS.",
+  },
 ];
 
 const HANDLERS: Record<string, (req: Request, path: string) => Response | Promise<Response>> = {
@@ -61,6 +68,7 @@ const HANDLERS: Record<string, (req: Request, path: string) => Response | Promis
   "06": handler06,
   "07": handler07,
   "08": handler08,
+  "09": handler09,
 };
 
 function escapeHTML(s: string): string {
